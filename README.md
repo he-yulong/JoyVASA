@@ -210,8 +210,8 @@ Chnage the `root_dir` in `01_extract_motions.py` with you own dataset path, then
 
 ```bash
 cd src/prepare_data
+python 00_extract_audio.py
 python 01_extract_motions.py
-python 05_extract_audio.py
 python 02_gen_labels.py
 pyhton 03_merge_motions.py
 python 04_gen_template.py

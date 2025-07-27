@@ -23,6 +23,7 @@ def exec_cmd(cmd):
 
 
 def images2video(images, wfp, **kwargs):
+    print(f"[Debug] Writing video to: {wfp}")
     fps = kwargs.get('fps', 25)
     video_format = kwargs.get('format', 'mp4')  # default is mp4 format
     codec = kwargs.get('codec', 'libx264')  # default is libx264 encoding
@@ -33,7 +34,7 @@ def images2video(images, wfp, **kwargs):
     ffmpeg_params = ['-crf', str(kwargs.get('crf', 18))]
 
     writer = imageio.get_writer(
-        wfp, fps=fps, format=video_format,
+        wfp, fps=fps, format='ffmpeg',
         codec=codec, quality=quality, ffmpeg_params=ffmpeg_params, pixelformat=pixelformat, macro_block_size=macro_block_size
     )
 

@@ -21,6 +21,8 @@ from .utils.helper import is_video, is_template, remove_suffix, is_square_video
 from .utils.rprint import rlog as log
 from .live_portrait_wmg_wrapper import LivePortraitWrapper
 
+import pathlib
+pathlib.PosixPath = pathlib.WindowsPath  # temporary：change PosixPath to Path on Windows
 
 def fast_check_ffmpeg():
     try:

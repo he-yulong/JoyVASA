@@ -39,6 +39,6 @@ def process_videos(video_list, suffix=".wav"):
 
 
 if __name__ == "__main__":
-    root_dir = "path/to/video"
+    root_dir = "D:/dev/jupyter_book/JoyVASA/data"
     video_names = sorted([os.path.join(root_dir, filename) for filename in os.listdir(root_dir) if filename.endswith("mp4")])
     process_videos(video_names, suffix=".wav")
