@@ -11,10 +11,10 @@ import torch.optim as optim
 from tensorboardX import SummaryWriter
 from torch.utils import data
 
-import src.utils as utils
-from src.dataset import infinite_data_loader
-from src.dataset.talkinghead_dataset_hungry import TalkingHeadDatasetHungry
-from src.modules.dit_talking_head import DitTalkingHead
+import joyvasa.utils as utils
+from joyvasa.dataset import infinite_data_loader
+from joyvasa.dataset.talkinghead_dataset_hungry import TalkingHeadDatasetHungry
+from joyvasa.modules.dit_talking_head import DitTalkingHead
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -386,11 +386,11 @@ def main(args, option_text=None):
     model = DitTalkingHead(**model_kwargs)
 
     # Dataset
-    train_dataset = TalkingHeadDatasetHungry(args.data_root, motion_filename=args.motion_filename, 
-                                             motion_templete_filename=args.motion_templete_filename, split="train", coef_fps=args.fps, n_motions=args.n_motions, 
+    train_dataset = TalkingHeadDatasetHungry(args.data_root, motion_filename=args.motion_filename,
+                                             motion_template_filename=args.motion_template_filename, split="train", coef_fps=args.fps, n_motions=args.n_motions,
                                              crop_strategy=args.crop_strategy, normalize_type=args.normalize_type)
-    val_dataset = TalkingHeadDatasetHungry(args.data_root, motion_filename=args.motion_filename, 
-                                           motion_templete_filename=args.motion_templete_filename, split="val", coef_fps=args.fps, n_motions=args.n_motions, 
+    val_dataset = TalkingHeadDatasetHungry(args.data_root, motion_filename=args.motion_filename,
+                                           motion_template_filename=args.motion_template_filename, split="val", coef_fps=args.fps, n_motions=args.n_motions,
                                            crop_strategy=args.crop_strategy, normalize_type=args.normalize_type)
     train_loader = data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, pin_memory=True)
     val_loader = data.DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers)
@@ -417,10 +417,10 @@ def main(args, option_text=None):
     # optimizer and scheduler
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=args.lr)
     if args.scheduler == 'Warmup':
-        from src.scheduler import GradualWarmupScheduler
+        from joyvasa.scheduler import GradualWarmupScheduler
         scheduler = GradualWarmupScheduler(optimizer, 1, args.warm_iter)
     elif args.scheduler == 'WarmupThenDecay':
-        from src.scheduler import GradualWarmupScheduler
+        from joyvasa.scheduler import GradualWarmupScheduler
         after_scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, args.cos_max_iter - args.warm_iter,
                                                                 args.lr * args.min_lr_ratio)
         scheduler = GradualWarmupScheduler(optimizer, 1, args.warm_iter, after_scheduler)
@@ -440,7 +440,7 @@ if __name__ == '__main__':
     # Dataset
     parser.add_argument('--data_root', type=Path, default="data/",)
     parser.add_argument('--motion_filename', type=str, default='motions.pkl')
-    parser.add_argument('--motion_templete_filename', type=str, default='motion_templete.pkl')
+    parser.add_argument('--motion_templete_filename', type=str, default='motion_template.pkl')
     parser.add_argument('--batch_size', type=int, default=16, help='batch size')
     parser.add_argument('--num_workers', type=int, default=4, help='number of workers for dataloader')
     parser.add_argument('--crop_strategy', type=str, default="random")

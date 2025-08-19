@@ -4,9 +4,9 @@ import os.path as osp
 import tyro
 import subprocess
 import platform
-from src.config.argument_config import ArgumentConfig
-from src.config.inference_config import InferenceConfig
-from src.config.crop_config import CropConfig
+from joyvasa.config.argument_config import ArgumentConfig
+from joyvasa.config.inference_config import InferenceConfig
+from joyvasa.config.crop_config import CropConfig
 
 if platform.system() == "Windows":
     import pathlib
@@ -51,13 +51,13 @@ def main():
 
     # init pipeline
     if args.animation_mode == "animal":
-        from src.live_portrait_wmg_pipeline_animal import LivePortraitPipelineAnimal
+        from joyvasa.live_portrait_wmg_pipeline_animal import LivePortraitPipelineAnimal
         pipeline = LivePortraitPipelineAnimal(
             inference_cfg=inference_cfg,
             crop_cfg=crop_cfg
         )
     elif args.animation_mode == "human":
-        from src.live_portrait_wmg_pipeline import LivePortraitPipeline
+        from joyvasa.live_portrait_wmg_pipeline import LivePortraitPipeline
         pipeline = LivePortraitPipeline(
             inference_cfg=inference_cfg,
             crop_cfg=crop_cfg

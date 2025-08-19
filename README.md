@@ -21,7 +21,7 @@
     <a href='https://jdh-algo.github.io/JoyVASA'><img src='https://img.shields.io/badge/Project-HomePage-Green'></a>
     <a href='https://arxiv.org/abs/2411.09209'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
     <a href='https://huggingface.co/jdh-algo/JoyVASA'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Model-yellow'></a>
-    <!-- <a href='https://huggingface.co/spaces/jdh-algo/JoyHallo'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Demo-yellow'></a> -->
+    <!-- <a href='https://huggingface.co/spaces/jdh-algo/JoyHallo'><img joyvasa='https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Demo-yellow'></a> -->
 </div>
 <br>
 
@@ -64,7 +64,7 @@ sudo apt-get update
 sudo apt-get install ffmpeg -y
 
 # 4. Optional: Install MultiScaleDeformableAttention for animal image animation
-cd src/utils/dependencies/XPose/models/UniPose/ops
+cd joyvasa/utils/dependencies/XPose/models/UniPose/ops
 python setup.py build install
 cd - # equal to cd ../../../../../../../
 ```
@@ -209,14 +209,14 @@ The motion generater should be trained using human talking face videos.
 Chnage the `root_dir` in `01_extract_motions.py` with you own dataset path, then run the following commands to generate training and validation data:
 
 ```bash
-cd src/prepare_data
+cd joyvasa/prepare_data
 python 00_extract_audio.py
 python 01_extract_motions.py
 python 02_gen_labels.py
 pyhton 03_merge_motions.py
 python 04_gen_template.py
 
-mv motion_templete.pkl motions.pkl train.json test.json ../../data
+mv motion_template.pkl motions.pkl train.json test.json ../../data
 cd ../..
 ```
 

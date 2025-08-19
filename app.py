@@ -4,11 +4,11 @@ import subprocess
 import gradio as gr
 import os.path as osp
 import platform
-from src.utils.helper import load_description
-from src.gradio_pipeline import GradioPipeline, GradioPipelineAnimal
-from src.config.crop_config import CropConfig
-from src.config.argument_config import ArgumentConfig
-from src.config.inference_config import InferenceConfig
+from joyvasa.utils.helper import load_description
+from joyvasa.gradio_pipeline import GradioPipeline, GradioPipelineAnimal
+from joyvasa.config.crop_config import CropConfig
+from joyvasa.config.argument_config import ArgumentConfig
+from joyvasa.config.inference_config import InferenceConfig
 
 if platform.system() == "Windows":
     import pathlib

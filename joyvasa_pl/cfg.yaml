@@ -1,0 +1,23 @@
+# joyvasa_pl/cfg.yaml
+seed: 42
+data:
+  Wpre: 25
+  Wcur: 100
+  batch_size: 16
+  num_workers: 8
+model:
+  Dm: 256
+  Da: 768
+  d_model: 512
+  nhead: 8
+  nlayers: 6
+  lr: 1.0e-4
+  betas: [1.0e-4, 2.0e-2]
+  lambda_vel: 5.0
+  lambda_smooth: 0.5
+  lambda_exp: 0.1
+train:
+  max_steps: 20000
+  precision: bf16-mixed
+  grad_clip: 1.0
+  accumulate_grad_batches: 1
